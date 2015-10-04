@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>edu.hfut</groupId>
+	<artifactId>hfut-utils</artifactId>
+	<version>1.2.3</version>
+	<name>Image Face</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.openimaj</groupId>
+			<artifactId>image-local-features</artifactId>
+			<version>1.4-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openimaj</groupId>
+					<artifactId>image-processing</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openimaj</groupId>
+					<artifactId>core-video</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.openimaj</groupId>
+			<artifactId>image-feature-extraction</artifactId>
+			<version>1.4-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openimaj</groupId>
+					<artifactId>image-processing</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openimaj</groupId>
+					<artifactId>core-video</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.openimaj</groupId>
+			<artifactId>FaceTracker</artifactId>
+			<version>1.4-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openimaj</groupId>
+					<artifactId>object-detection</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openimaj</groupId>
+					<artifactId>image-processing</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xuggle</groupId>
+					<artifactId>xuggle-xuggler</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xuggle</groupId>
+					<artifactId>xuggle-xuggler-lgpl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.openimaj</groupId>
+			<artifactId>JTransforms</artifactId>
+			<version>1.4-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openimaj</groupId>
+			<artifactId>test-resources</artifactId>
+			<version>1.4-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<argLine>-Xmx1G -Djava.awt.headless=true</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<finalName>{project.artifactId}-${project.version}</finalName>
+	</build>
+
+	<!-- 部署仓库 -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>zxsoft-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://192.168.3.23:18081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>sentiment</id>
+			<url>http://192.168.3.23:18081/nexus/content/repositories/sentiment</url>
+		</repository>
+	</distributionManagement>
+
+</project>
